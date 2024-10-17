@@ -1,4 +1,3 @@
-import os
 from flask import Flask, request, send_file
 from flask_cors import CORS
 from rembg import remove
@@ -8,7 +7,7 @@ import io
 app = Flask(__name__)
 CORS(app)
 
-@app.route('/remove-background', methods=['POST'])
+@app.route('/api/remove-background', methods=['POST'])
 def remove_background():
     if 'image' not in request.files:
         return 'No image file uploaded', 400
@@ -29,5 +28,4 @@ def remove_background():
     return send_file(img_byte_arr, mimetype='image/png')
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run()
